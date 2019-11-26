@@ -19,6 +19,9 @@ using std::any;
 using std::vector;
 using std::map;
 using std::any_cast;
+using std::exception;
+using std::basic_ifstream;
+using std::fstream;
 
 class Json {
 

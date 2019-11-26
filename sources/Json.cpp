@@ -96,7 +96,6 @@
 
     bool Json::split_bool(const string &str, size_t &j) 
     {
-        string string;
         size_t i = j;
         bool a;
         if (isalpha(str[i]) && str[i] == 't') {
