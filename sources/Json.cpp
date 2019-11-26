@@ -1,4 +1,4 @@
-#include "library.hpp"
+#include "library.h"
     // Конструктор из строки, содержащей Json-данные.
     Json::Json(const string &s) {
         size_t i = 0;

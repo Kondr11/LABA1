@@ -1,6 +1,6 @@
 // Copyright 2019 <Kondr11>
 
-#include "library.hpp"
+#include "library.h"
 
 int main() {
     string text;
