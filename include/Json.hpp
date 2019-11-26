@@ -22,6 +22,8 @@ using std::any_cast;
 using std::exception;
 using std::basic_ifstream;
 using std::fstream;
+using std::bad_any_cast;
+using std::ifstream;
 
 class Json {
 
