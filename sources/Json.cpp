@@ -47,35 +47,26 @@
 
     any &Json::operator[](const string &key)
     {
-        try {
-            if (is_object()) {
-                return any_cast<map<string, any>>(data_map)[key];
-            }
+        if (is_object()) {
+            return any_cast<map<string, any>>(data_map)[key];
         }
-        catch (exception &e) {
-            cout << e.what() << endl;
-        }
-
+        else throw std::logic_error("is not an object");
     }
 
     any &Json::operator[](int index) 
     {
-        try {
-            if (is_array()) {
-                return any_cast<vector<any>>(data_arr)[index];
-            }
+        if (is_array()) {
+            return any_cast<vector<any>>(data_arr)[index];
         }
-        catch (exception &e) {
-            cout << e.what() << endl;
-        }
+        else throw std::logic_error("is not an array");
     }
 
-    static Json Json::parse(const string &s) 
+    Json Json::parse(const string &s) 
     {
         return Json(s);
     }
 
-    static Json Json::parseFile(const string &path_to_file)
+    Json Json::parseFile(const string &path_to_file)
     {
         ifstream file(path_to_file);
         string s;
@@ -106,14 +97,17 @@
     {
         string string;
         size_t i = j;
+        bool a;
         if (isalpha(str[i]) && str[i] == 't') {
             this->t = j + 4;
-            return true;
+            a = true;
         }
         else if (isalpha(str[i]) && str[i] == 'f') {
             this->t = j + 5;
-            return false;
+            a = false;
         }
+        
+        return a;
     }
 
     double Json::split_double(const string &str, size_t &j) 
@@ -128,7 +122,7 @@
                 return stof(s);
             }
         }
-        //return stof(s);
+        return stof(s);
     }
 
     vector<any> Json::split_arr(const string &str, size_t &j)  
@@ -178,6 +172,7 @@
                 }
             }
         }
+        return result;
     }
 
     map<string, any> Json::split_obj(const string &str, size_t &j) 
@@ -238,6 +233,7 @@
                 }
             }
         }
+        return result;
     }
 
     void Json::print(any _data) 
@@ -301,5 +297,4 @@
         }
         cout<< "}\n";
     }
-
 
