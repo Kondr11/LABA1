@@ -1,3 +1,4 @@
+//Copyright 2019 <Kondr11>
 #include "Json.hpp"
 
     Json::Json(const string &s) 

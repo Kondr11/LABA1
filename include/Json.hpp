@@ -1,6 +1,6 @@
 //Copyright 2019 <Kondr11>
-#ifndef HEADER_JSON_HPP
-#define HEADER_JSON_HPP
+#ifndef HEADER_JSON_HPP_
+#define HEADER_JSON_HPP_
 
 #include <iostream>
 #include <any>
@@ -8,12 +8,17 @@
 #include <sstream>
 #include <string>
 #include <fstream>
-#include <vector>
 #include <exception>
 #include <map>
 #include <list>
 
-using namespace std;
+using std::cout;
+using std::cin;
+using std::string;
+using std::any;
+using std::vector;
+using std::map;
+using std::any_cast;
 
 class Json {
 
@@ -59,4 +64,4 @@ public:
 };
 
 
-#endif //HEADER_JSON_HPP
+#endif // INCLUDE_JSON_HPP_
