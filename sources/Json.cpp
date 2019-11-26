@@ -1,6 +1,7 @@
 #include "Json.hpp"
 
-    Json::Json(const string &s) {
+    Json::Json(const string &s) 
+    {
         size_t i = 0;
         if (s[i] == '{') {
             data_map = split_obj(s, i);
@@ -11,16 +12,19 @@
         }
     }
 
-    Json::Json(const map<string, any> &map) {
+    Json::Json(const map<string, any> &map)
+    {
         data_map = map;
     }
 
-    Json::Json(const vector<any> &vector) {
+    Json::Json(const vector<any> &vector) 
+    {
         data_arr = vector;
     }
 
 
-    bool Json::is_array() const {
+    bool Json::is_array() const 
+    {
         try {
             any_cast<vector<any>>(data_arr);
             return true;
@@ -30,7 +34,8 @@
         }
     }
 
-    bool Json::is_object() const {
+    bool Json::is_object() const 
+    {
         try {
             any_cast<map<string, any>>(data_map);
             return true;
@@ -40,7 +45,8 @@
         }
     }
 
-    any &Json::operator[](const string &key) {
+    any &Json::operator[](const string &key)
+    {
         try {
             if (is_object()) {
                 return any_cast<map<string, any>>(data_map)[key];
@@ -52,7 +58,8 @@
 
     }
 
-    any &Json::operator[](int index) {
+    any &Json::operator[](int index) 
+    {
         try {
             if (is_array()) {
                 return any_cast<vector<any>>(data_arr)[index];
@@ -63,12 +70,14 @@
         }
     }
 
-    static Json Json::parse(const string &s) {
+    static Json Json::parse(const string &s) 
+    {
         return Json(s);
     }
 
-    static Json Json::parseFile(const string &path_to_file) {
-        ifstream file;
+    static Json Json::parseFile(const string &path_to_file)
+    {
+        ifstream file(path_to_file);
         string s;
         string line;
         while (getline(file, line)) {
@@ -77,7 +86,8 @@
         return Json(s);
     }
 
-    string Json::split_string(const string &str, size_t &j) {
+    string Json::split_string(const string &str, size_t &j) 
+    {
         string result;
         size_t next;
         size_t teta;
@@ -92,7 +102,8 @@
         return result;
     }
 
-    bool Json::split_bool(const string &str, size_t &j) {
+    bool Json::split_bool(const string &str, size_t &j) 
+    {
         string string;
         size_t i = j;
         if (isalpha(str[i]) && str[i] == 't') {
@@ -105,7 +116,8 @@
         }
     }
 
-    double Json::split_double(const string &str, size_t &j) {
+    double Json::split_double(const string &str, size_t &j) 
+    {
         string s;
         for (size_t i = j; i < str.size(); ++i) {
             if (isdigit(str[i]) || str[i] == '.') {
@@ -119,7 +131,8 @@
         //return stof(s);
     }
 
-    vector<any> Json::split_arr(const string &str, size_t &j) {
+    vector<any> Json::split_arr(const string &str, size_t &j)  
+    {
         vector<any> result;
         j = str.find('[', j);
         this->t = j;
@@ -167,7 +180,8 @@
         }
     }
 
-    map<string, any> Json::split_obj(const string &str, size_t &j) {
+    map<string, any> Json::split_obj(const string &str, size_t &j) 
+    {
         map<string, any> result;
         string key;
         bool iskey = true;
@@ -226,7 +240,8 @@
         }
     }
 
-    void Json::print(any _data) {
+    void Json::print(any _data) 
+    {
         string type = _data.type().name();
 
         try {
@@ -274,7 +289,8 @@
         }
     }
 
-    void Json::print_map() {
+    void Json::print_map() 
+    {
         cout << "{\n";
         int i = 0;
         for(const auto& p : this->data_map) {
