@@ -21,31 +21,11 @@ public:
     map <string, any> data_map;
     vector <any> data_arr;
     // Конструктор из строки, содержащей Json-данные.
-    Json(const string &s) {
-        //for (size_t i = 0; i < s.size(); i++) {
-        size_t i = 0;
-        if (s[i] == '{') {
-            data_map = split_obj(s, i);
-            //cout<<any_cast<map<string, any>>(data)[i];
-        } else {
-            if (s[i] == '[') {
-                data_arr = split_arr(s, i);
-            }
-            else{
-                //throw logic_error("Error");
-            }
-        }
-        //}
-    }
+    Json(const string &s);
 
-    Json(const map<string, any> &map) {
-        data_map = map;
-    }
+    Json(const map<string, any> &map);
 
-    Json(const vector<any> &vector) {
-        data_arr = vector;
-    }
-
+    Json(const vector<any> &vector);
 
     // Метод возвращает true, если данный экземпляр содержит в себе JSON-массив. Иначе false.
     bool is_array() const {
