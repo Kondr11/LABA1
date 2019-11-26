@@ -49,7 +49,7 @@
     any &Json::operator[](const string &key)
     {
         if (is_object()) {
-            return any_cast<map<string, any>>(data_map)[key];
+	    return this->data_map[key]; 
         }
         else throw std::logic_error("is not an object");
     }
@@ -57,7 +57,7 @@
     any &Json::operator[](int index) 
     {
         if (is_array()) {
-            return any_cast<vector<any>>(data_arr)[index];
+            return this->data_arr[index];
         }
         else throw std::logic_error("is not an array");
     }
