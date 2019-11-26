@@ -24,6 +24,7 @@ using std::basic_ifstream;
 using std::fstream;
 using std::bad_any_cast;
 using std::ifstream;
+using std::endl;
 
 class Json {
 
