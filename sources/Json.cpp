@@ -101,8 +101,7 @@
         if (isalpha(str[i]) && str[i] == 't') {
             this->t = j + 4;
             a = true;
-        }
-        else if (isalpha(str[i]) && str[i] == 'f') {
+        } else if (isalpha(str[i]) && str[i] == 'f') {
             this->t = j + 5;
             a = false;
         }
