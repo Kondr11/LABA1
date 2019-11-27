@@ -104,6 +104,7 @@
             this->t = j + 5;
             return false;
         }
+        return false;
     }
 
     double Json::split_double(const string &str, size_t &j)
