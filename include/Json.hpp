@@ -27,11 +27,11 @@ using std::ifstream;
 using std::endl;
 
 class Json {
-public:
+private:
     size_t t = 0;
     map <string, any> data_map;
     vector <any> data_arr;
-
+public:
     explicit Json(const string &s);
 
     explicit Json(const map<string, any> &map);
