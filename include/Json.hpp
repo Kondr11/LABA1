@@ -31,6 +31,7 @@ private:
     size_t t = 0;
     map <string, any> data_map;
     vector <any> data_arr;
+
 public:
     explicit Json(const string &s);
 
