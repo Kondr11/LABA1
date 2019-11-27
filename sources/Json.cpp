@@ -48,18 +48,16 @@
 
     any &Json::operator[](const string &key)
     {
-        if (is_object()) {
-             return this->data_map[key]; 
-        }
+        if (is_object())
+             return this->data_map[key];
         else
              throw std::logic_error("is not an object");
     }
 
     any &Json::operator[](int index)
     {
-        if (is_array()) {
+        if (is_array())
             return this->data_arr[index];
-        }
         else
             throw std::logic_error("is not an array");
     }
@@ -104,8 +102,7 @@
             this->t = j + 4;
             a = true;
         }
-        else
-        if (isalpha(str[i]) && str[i] == 'f') {
+        else if (isalpha(str[i]) && str[i] == 'f') {
             this->t = j + 5;
             a = false;
         }
@@ -128,7 +125,7 @@
         return stof(s);
     }
 
-    vector<any> Json::split_arr(const string &str, size_t &j) 
+    vector<any> Json::split_arr(const string &str, size_t &j)
     {
         vector<any> result;
         j = str.find('[', j);
@@ -162,7 +159,7 @@
                     i = this->t;
                 //} else if (str[i] == '[') {
                    //result.emplace_back(split_arr(str, i));
-                    //i = this->t; 
+                    //i = this->t;
                 } else if (str[i] == '{') {
                     result.emplace_back(split_obj(str, i));
                     i = this->t;
@@ -248,20 +245,19 @@
             } else if (type == "d") {
                 cout << any_cast<double> (_data);
             } else if (type == "b") {
-                if (any_cast<bool> (_data)) 
+                if (any_cast<bool> (_data))
                     std::cout << "true";
-                else 
+                else
                     cout << "false";
-            } else if (type == "Ss" ||type == 
-                 "NSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE")
-            {
+            } else if (type == "Ss" ||type ==
+                 "NSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE") {
                 cout << any_cast<string> (_data);
             } else if (type.find("St6vector") < type.length()) {
                 std::vector <std::any> vec;
                 vec = any_cast<vector<any>>(_data);
                 unsigned int count = 0;
                 cout << "[ ";
-                for (const auto& c: vec) {
+                for (const auto& c : vec) {
                     count++;
                     if (count > 1) std::cout << " , ";
                     print(c);
@@ -270,9 +266,9 @@
             } else if (type.find("St3map") < type.length()) {
                 map <string, any> _map;
                 _map = std::any_cast<map <string, any>>(_data);
-                cout << "{\n" ;
+                cout << "{\n";
                 unsigned int count = 0;
-                for (const auto& c: _map) {
+                for (const auto& c : _map) {
                     count++;
                     if (count > 1) cout << " ,\n";
                     cout << "\t" << c.first << " : ";

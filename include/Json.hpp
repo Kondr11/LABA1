@@ -1,6 +1,6 @@
 //Copyright 2019 <Kondr11>
 #ifndef INCLUDE_JSON_HPP_
-#define HEADER_JSON_HPP_
+#define INCLUDE_JSON_HPP_
 
 #include <iostream>
 #include <any>
@@ -41,7 +41,7 @@ public:
     bool is_array() const;
 
     bool is_object() const;
- 
+
     any & operator[](const string &key);
 
     any & operator[](int index);
