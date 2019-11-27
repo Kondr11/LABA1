@@ -1,7 +1,7 @@
 //Copyright 2019 <Kondr11>
 #include "Json.hpp"
 
-    Json::Json(const string &s) 
+    Json::Json(const string &s)
     {
         size_t i = 0;
         if (s[i] == '{') {
@@ -18,13 +18,13 @@
         data_map = map;
     }
 
-    Json::Json(const vector<any> &vector) 
+    Json::Json(const vector<any> &vector)
     {
         data_arr = vector;
     }
 
 
-    bool Json::is_array() const 
+    bool Json::is_array() const
     {
         try {
             any_cast<vector<any>>(data_arr);
@@ -35,7 +35,7 @@
         }
     }
 
-    bool Json::is_object() const 
+    bool Json::is_object() const
     {
         try {
             any_cast<map<string, any>>(data_map);
@@ -49,20 +49,22 @@
     any &Json::operator[](const string &key)
     {
         if (is_object()) {
-	    return this->data_map[key]; 
+             return this->data_map[key]; 
         }
-        else throw std::logic_error("is not an object");
+        else
+             throw std::logic_error("is not an object");
     }
 
-    any &Json::operator[](int index) 
+    any &Json::operator[](int index)
     {
         if (is_array()) {
             return this->data_arr[index];
         }
-        else throw std::logic_error("is not an array");
+        else
+            throw std::logic_error("is not an array");
     }
 
-    Json Json::parse(const string &s) 
+    Json Json::parse(const string &s)
     {
         return Json(s);
     }
@@ -78,7 +80,7 @@
         return Json(s);
     }
 
-    string Json::split_string(const string &str, size_t &j) 
+    string Json::split_string(const string &str, size_t &j)
     {
         string result;
         size_t next;
@@ -94,7 +96,7 @@
         return result;
     }
 
-    bool Json::split_bool(const string &str, size_t &j) 
+    bool Json::split_bool(const string &str, size_t &j)
     {
         size_t i = j;
         bool a;
@@ -102,15 +104,16 @@
             this->t = j + 4;
             a = true;
         }
-        else if (isalpha(str[i]) && str[i] == 'f') {
+        else
+        if (isalpha(str[i]) && str[i] == 'f') {
             this->t = j + 5;
             a = false;
         }
-        
+
         return a;
     }
 
-    double Json::split_double(const string &str, size_t &j) 
+    double Json::split_double(const string &str, size_t &j)
     {
         string s;
         for (size_t i = j; i < str.size(); ++i) {
@@ -125,7 +128,7 @@
         return stof(s);
     }
 
-    vector<any> Json::split_arr(const string &str, size_t &j)  
+    vector<any> Json::split_arr(const string &str, size_t &j) 
     {
         vector<any> result;
         j = str.find('[', j);
@@ -142,7 +145,7 @@
             exit[k] = str.find(']', exit[k-1]+1);
             i = exit[k];
             //cout<<exit[k]<<endl;
-            if(i == str.find_last_of(']', j+1))
+            if (i == str.find_last_of(']', j+1))
                 break;
         }
 
@@ -157,10 +160,10 @@
                 } else if (str[i] == '"') {
                     result.emplace_back(split_string(str, i));
                     i = this->t;
-                } /*else if (str[i] == '[') {
-                    result.emplace_back(split_arr(str, i));
-                    i = this->t;
-                } */else if (str[i] == '{') {
+                //} else if (str[i] == '[') {
+                   //result.emplace_back(split_arr(str, i));
+                    //i = this->t; 
+                } else if (str[i] == '{') {
                     result.emplace_back(split_obj(str, i));
                     i = this->t;
                 } else if (str[i] == ',' || isspace(str[i])) {
@@ -175,7 +178,7 @@
         return result;
     }
 
-    map<string, any> Json::split_obj(const string &str, size_t &j) 
+    map<string, any> Json::split_obj(const string &str, size_t &j)
     {
         map<string, any> result;
         string key;
@@ -194,7 +197,7 @@
             exit[k] = str.find('}', exit[k-1]+1);
             i = exit[k];
             //cout<<exit[k]<<endl;
-            if(i == str.find_last_of('}', j+1))
+            if (i == str.find_last_of('}', j+1))
                 break;
         }
 
@@ -206,8 +209,7 @@
                     iskey = false;
                     this->t = str.find(':', this->t);
                     i = str.find_first_not_of(isspace(str[this->t]), this->t+1);
-                }
-                else if (str[i] == '"' && !iskey) {
+                } else if (str[i] == '"' && !iskey) {
                     result[key] = split_string(str, i);
                     i = this->t;
                     iskey = true;
@@ -236,42 +238,41 @@
         return result;
     }
 
-    void Json::print(any _data) 
+    void Json::print(any _data)
     {
         string type = _data.type().name();
 
         try {
             if (type == "i") {
                 cout << any_cast<int> (_data);
-            }
-            else if (type == "d") {
+            } else if (type == "d") {
                 cout << any_cast<double> (_data);
-            }
-            else if (type == "b") {
-                if (any_cast<bool> (_data)) std::cout << "true";
-                else cout << "false";
-            }
-            else if (type == "Ss" ||type == "NSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE") 		    {
+            } else if (type == "b") {
+                if (any_cast<bool> (_data)) 
+                    std::cout << "true";
+                else 
+                    cout << "false";
+            } else if (type == "Ss" ||type == 
+                 "NSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE")
+            {
                 cout << any_cast<string> (_data);
-            }
-            else if (type.find("St6vector") < type.length()) {
+            } else if (type.find("St6vector") < type.length()) {
                 std::vector <std::any> vec;
                 vec = any_cast<vector<any>>(_data);
                 unsigned int count = 0;
                 cout << "[ ";
-                for(const auto& c: vec) {
+                for (const auto& c: vec) {
                     count++;
                     if (count > 1) std::cout << " , ";
                     print(c);
                 }
                 cout << " ]";
-            }
-            else if (type.find("St3map") < type.length()) {
+            } else if (type.find("St3map") < type.length()) {
                 map <string, any> _map;
                 _map = std::any_cast<map <string, any>>(_data);
                 cout << "{\n" ;
                 unsigned int count = 0;
-                for(const auto& c: _map) {
+                for (const auto& c: _map) {
                     count++;
                     if (count > 1) cout << " ,\n";
                     cout << "\t" << c.first << " : ";
@@ -285,11 +286,11 @@
         }
     }
 
-    void Json::print_map() 
+    void Json::print_map()
     {
         cout << "{\n";
         int i = 0;
-        for(const auto& p : this->data_map) {
+        for (const auto& p : this->data_map) {
             if (i != 0) cout <<",\n";
             cout << "   "<< p.first << " : ";
             print(p.second);

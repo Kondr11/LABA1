@@ -1,5 +1,5 @@
 //Copyright 2019 <Kondr11>
-#ifndef HEADER_JSON_HPP_
+#ifndef INCLUDE_JSON_HPP_
 #define HEADER_JSON_HPP_
 
 #include <iostream>
@@ -27,30 +27,27 @@ using std::ifstream;
 using std::endl;
 
 class Json {
-
 public:
     size_t t = 0;
     map <string, any> data_map;
     vector <any> data_arr;
 
-    Json(const string &s);
+    explicit Json(const string &s);
 
-    Json(const map<string, any> &map);
+    explicit Json(const map<string, any> &map);
 
-    Json(const vector<any> &vector);
+    explicit Json(const vector<any> &vector);
 
     bool is_array() const;
-    
-    bool is_object() const;
 
-    
+    bool is_object() const;
+ 
     any & operator[](const string &key);
 
-    
-    any & operator[](int index); 
-    
+    any & operator[](int index);
+
     static Json parse(const string &s);
-    
+
     static Json parseFile(const string &path_to_file);
 
     string split_string(const string &str, size_t &j);
@@ -66,7 +63,6 @@ public:
     void print(any _data);
 
     void print_map();
-
 };
 
 

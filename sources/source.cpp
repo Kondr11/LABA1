@@ -12,5 +12,4 @@ int main() {
     Json object = Json::parse(text);
     cout<< endl;
     object.print_map();
-
 }
