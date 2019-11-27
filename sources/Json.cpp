@@ -165,12 +165,13 @@
                     this->t = i;
                 } else if (str[i] == ']') {
                     this->t = i;
+                    delete[] next;
+                    delete[] exit;
+
                     return result;
                 }
             }
         }
-        delete[] next;
-        delete[] exit;
 
         return result;
     }
@@ -228,12 +229,14 @@
                     iskey = true;
                 } else if (str[i] == '}') {
                     this->t = i;
+                    delete[] next;
+                    delete[] exit;
+
                     return result;
                 }
             }
         }
-        delete[] next;
-        delete[] exit;
+        
 
         return result;
     }
