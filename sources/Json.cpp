@@ -169,8 +169,8 @@
                 }
             }
         }
-        delete next;
-        delete exit;
+        delete[] next;
+        delete[] exit;
 
         return result;
     }
@@ -232,8 +232,8 @@
                 }
             }
         }
-        delete next;
-        delete exit;
+        delete[] next;
+        delete[] exit;
 
         return result;
     }
