@@ -97,16 +97,13 @@
     bool Json::split_bool(const string &str, size_t &j)
     {
         size_t i = j;
-        bool a;
         if (isalpha(str[i]) && str[i] == 't') {
             this->t = j + 4;
-            a = true;
+            return true;
         } else if (isalpha(str[i]) && str[i] == 'f') {
             this->t = j + 5;
-            a = false;
+            return false;
         }
-
-        return a;
     }
 
     double Json::split_double(const string &str, size_t &j)
